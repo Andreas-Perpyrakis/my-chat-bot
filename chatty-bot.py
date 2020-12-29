@@ -5,12 +5,16 @@ Created on Tue Dec 29 01:36:01 2020
 @author: Andreas Perpyrakis
 first attemnt of creating a chat-bot named Jack plus using Git
 """
-
+'''
+before use chat bot make sure you have installed these:
+pip install chatterbot
+pip install chatterbot_corpus
+'''
 from chatterbot import ChatBot
 from chatterbot.trainers import ListTrainer
 from chatterbot.trainers import ChatterBotCorpusTrainer
 
-Jack = ChatBot(name='PyBot', read_only=True,
+my_bot = ChatBot(name='Jack', read_only=True,
                  logic_adapters=['chatterbot.logic.MathematicalEvaluation',
                                  'chatterbot.logic.BestMatch'])
 
@@ -37,17 +41,26 @@ math_talk_1 = ['pythagorean theorem',
 math_talk_2 = ['law of cosines',
                'c**2 = a**2 + b**2 - 2 * a * b * cos(gamma)']
 
-list_trainer = ListTrainer(Jack)
+list_trainer = ListTrainer(my_bot)
 
 
 for item in (small_talk, math_talk_1, math_talk_2):
     list_trainer.train(item) 
 
-corpus_trainer = ChatterBotCorpusTrainer(Jack)
+corpus_trainer = ChatterBotCorpusTrainer(my_bot)
 corpus_trainer.train('chatterbot.corpus.english')
 
-print (Jack.get_response("Hi there"))
-print (Jack.get_response("I had a nice day"))
-print (Jack.get_response("What's your name stranger?"))
-print (Jack.get_response("Use Pythagorean Theorem "))
-print (Jack.get_response("Show me Law of Cosines"))
+print (my_bot.get_response("Hi there"))
+print (my_bot.get_response("I had a nice day"))
+print (my_bot.get_response("What's your name stranger?"))
+print (my_bot.get_response("Use Pythagorean Theorem "))
+print (my_bot.get_response("Show me Law of Cosines"))
+
+while True:
+    try:
+        bot_input = input("You ")
+        bot_response = my_bot.get_response(bot_input)
+        print (f"{my_bot.name}: {bot_response}")
+    except (KeyboardInterrupt, EOFError, SystemExit):
+        break
+    
