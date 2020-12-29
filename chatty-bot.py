@@ -9,7 +9,7 @@ first attemnt of creating a chat-bot named Jack plus using Git
 before use chat bot make sure you have installed these:
 pip install --upgrade pip
 pip install chatterbot
-pip install chatterbot_corpus
+pip install chatterbot-corpus
 '''
 from chatterbot import ChatBot
 from chatterbot.trainers import ListTrainer
